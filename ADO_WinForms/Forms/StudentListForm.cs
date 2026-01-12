@@ -10,9 +10,9 @@ namespace ADO_WinForms.Forms
     public partial class StudentListForm : Form
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["StudentDBConnection"].ConnectionString;
-        private DataGridView dgvStudents;
-        private TextBox txtSearch;
-        private ComboBox cmbCourseFilter;
+        private DataGridView dgvStudents = null!;
+        private TextBox txtSearch = null!;
+        private ComboBox cmbCourseFilter = null!;
 
         public StudentListForm()
         {

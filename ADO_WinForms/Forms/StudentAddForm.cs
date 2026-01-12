@@ -10,10 +10,10 @@ namespace ADO_WinForms.Forms
     public partial class StudentAddForm : Form
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["StudentDBConnection"].ConnectionString;
-        private TextBox txtStudentNumber, txtFirstName, txtLastName, txtEmail, txtPhone, txtGPA;
-        private DateTimePicker dtpDateOfBirth;
-        private ComboBox cmbCourse;
-        private CheckBox chkIsActive;
+        private TextBox txtStudentNumber = null!, txtFirstName = null!, txtLastName = null!, txtEmail = null!, txtPhone = null!, txtGPA = null!;
+        private DateTimePicker dtpDateOfBirth = null!;
+        private ComboBox cmbCourse = null!;
+        private CheckBox chkIsActive = null!;
 
         public StudentAddForm()
         {
