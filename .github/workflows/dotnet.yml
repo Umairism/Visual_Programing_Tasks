@@ -21,10 +21,35 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Taska.sln
     
-    - name: Build solution
-      run: dotnet build Taska.sln --configuration Release --no-restore
+    - name: Build .NET 10 Compatible Projects Only
+      run: |
+        Write-Host "Building .NET 10 compatible projects..." -ForegroundColor Cyan
+        Write-Host "NOTE: Web Forms projects (ADO_CRUD, Auth_WebForms, etc.) are skipped - they require .NET Framework" -ForegroundColor Yellow
+        Write-Host ""
+        
+        # Build only .NET 10 compatible projects
+        dotnet build ADO_WinForms/ADO_WinForms.csproj --configuration Release --no-restore
+        dotnet build REST_API/REST_API.csproj --configuration Release --no-restore
+        dotnet build API_Consumer/API_Consumer.csproj --configuration Release --no-restore
+        dotnet build Core_MVC_EF/Core_MVC_EF.csproj --configuration Release --no-restore
     
     - name: Display build info
       run: |
         Write-Host "Build completed successfully!" -ForegroundColor Green
-        Write-Host "All 11 projects built with .NET 10" -ForegroundColor Cyan
+        Write-Host "4 out of 11 projects built with .NET 10:" -ForegroundColor Cyan
+        Write-Host "  ✓ ADO_WinForms (Windows Forms)" -ForegroundColor Green
+        Write-Host "  ✓ REST_API (ASP.NET Core Web API)" -ForegroundColor Green
+        Write-Host "  ✓ API_Consumer (Console App)" -ForegroundColor Green
+        Write-Host "  ✓ Core_MVC_EF (ASP.NET Core MVC)" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "7 Web Forms projects skipped (require .NET Framework):" -ForegroundColor Yellow
+        Write-Host "  ⊗ ADO_CRUD" -ForegroundColor Yellow
+        Write-Host "  ⊗ Auth_WebForms" -ForegroundColor Yellow
+        Write-Host "  ⊗ Auth_WebForms_Connected" -ForegroundColor Yellow
+        Write-Host "  ⊗ DbCon_CRUD" -ForegroundColor Yellow
+        Write-Host "  ⊗ StoredProcedure_CRUD" -ForegroundColor Yellow
+        Write-Host "  ⊗ ThreeTier_CRUD" -ForegroundColor Yellow
+        Write-Host "  ⊗ MasterPage_Demo" -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "See WEBFORMS_NET10_INCOMPATIBILITY.md for details" -ForegroundColor Cyan
+

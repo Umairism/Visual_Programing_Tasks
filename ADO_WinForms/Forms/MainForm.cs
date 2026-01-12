@@ -1,7 +1,7 @@
 using System;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -61,16 +61,21 @@ namespace ADO_WinForms.Forms
             };
 
             // Statistics Labels
-            lblTotalStudents = CreateStatLabel("0", "Total Students", 20, Color.FromArgb(41, 128, 185));
-            lblTotalCourses = CreateStatLabel("0", "Total Courses", 255, Color.FromArgb(142, 68, 173));
-            lblAverageGPA = CreateStatLabel("0.00", "Average GPA", 490, Color.FromArgb(39, 174, 96));
-            lblExcellentStudents = CreateStatLabel("0", "Excellent (≥ 3.75)", 725, Color.FromArgb(230, 126, 34));
+            var totalStudentsStats = CreateStatLabel("0", "Total Students", 20, Color.FromArgb(41, 128, 185));
+            var totalCoursesStats = CreateStatLabel("0", "Total Courses", 255, Color.FromArgb(142, 68, 173));
+            var averageGPAStats = CreateStatLabel("0.00", "Average GPA", 490, Color.FromArgb(39, 174, 96));
+            var excellentStudentsStats = CreateStatLabel("0", "Excellent (≥ 3.75)", 725, Color.FromArgb(230, 126, 34));
+
+            lblTotalStudents = totalStudentsStats.Label;
+            lblTotalCourses = totalCoursesStats.Label;
+            lblAverageGPA = averageGPAStats.Label;
+            lblExcellentStudents = excellentStudentsStats.Label;
 
             statsPanel.Controls.AddRange(new Control[] {
-                lblTotalStudents.Label, lblTotalStudents.Caption,
-                lblTotalCourses.Label, lblTotalCourses.Caption,
-                lblAverageGPA.Label, lblAverageGPA.Caption,
-                lblExcellentStudents.Label, lblExcellentStudents.Caption
+                totalStudentsStats.Label, totalStudentsStats.Caption,
+                totalCoursesStats.Label, totalCoursesStats.Caption,
+                averageGPAStats.Label, averageGPAStats.Caption,
+                excellentStudentsStats.Label, excellentStudentsStats.Caption
             });
 
             // Navigation Panel

@@ -1,24 +1,34 @@
 # My Visual Programming Practice Projects
 
+## ⚠️ IMPORTANT: .NET 10 Compatibility
+
+**Only 4 out of 11 projects** can run on .NET 10. The other 7 are **ASP.NET Web Forms** projects that require **.NET Framework 4.8**.
+
+See [WEBFORMS_NET10_INCOMPATIBILITY.md](WEBFORMS_NET10_INCOMPATIBILITY.md) for full details.
+
 ## About This Collection
 
-Hey! This is my collection of **11 .NET projects** that I've been working on to learn different architectures and patterns. Recently upgraded everything to **.NET 10** to work with Visual Studio 2026.
+Hey! This is my collection of **11 .NET projects** that I've been working on to learn different architectures and patterns.
 
 ## 📦 All Projects
 
-| # | Project | Type | Technology | Description |
-|---|---------|------|------------|-------------|
-| 1 | **ADO_WinForms** | Desktop | Windows Forms | Pure ADO.NET CRUD in desktop app |
-| 2 | **ADO_CRUD** | Web | Web Forms | Pure ADO.NET CRUD operations |
-| 3 | **DbCon_CRUD** | Web | Web Forms | Centralized DbCon utility class |
-| 4 | **ThreeTier_CRUD** | Web | Web Forms | 3-Tier architecture (DAL, BLL, UI) |
-| 5 | **StoredProcedure_CRUD** | Web | Web Forms | Database operations via stored procedures |
-| 6 | **MasterPage_Demo** | Web | Web Forms | Master pages and consistent layouts |
-| 7 | **Auth_WebForms** | Web | Web Forms | Custom authentication system |
-| 8 | **Auth_WebForms_Connected** | Web | Web Forms | Database-backed authentication |
-| 9 | **REST_API** | API | ASP.NET Core | RESTful API with Entity Framework Core |
-| 10 | **API_Consumer** | Web | Web App | Consuming REST APIs |
-| 11 | **Core_MVC_EF** | Web | ASP.NET Core MVC | Modern MVC with EF Core |
+| # | Project | Type | Technology | .NET 10 Status |
+|---|---------|------|------------|----------------|
+| 1 | **ADO_WinForms** | Desktop | Windows Forms | ✅ Works |
+| 2 | **ADO_CRUD** | Web | Web Forms | ❌ Framework Only |
+| 3 | **DbCon_CRUD** | Web | Web Forms | ❌ Framework Only |
+| 4 | **ThreeTier_CRUD** | Web | Web Forms | ❌ Framework Only |
+| 5 | **StoredProcedure_CRUD** | Web | Web Forms | ❌ Framework Only |
+| 6 | **MasterPage_Demo** | Web | Web Forms | ❌ Framework Only |
+| 7 | **Auth_WebForms** | Web | Web Forms | ❌ Framework Only |
+| 8 | **Auth_WebForms_Connected** | Web | Web Forms | ❌ Framework Only |
+| 9 | **REST_API** | API | ASP.NET Core | ✅ Works |
+| 10 | **API_Consumer** | Console | .NET Core | ✅ Works |
+| 11 | **Core_MVC_EF** | Web | ASP.NET Core MVC | ✅ Works |
+
+**Legend:**
+- ✅ **Works on .NET 10** - Modern .NET Core/.NET 5+ compatible
+- ❌ **Framework Only** - Requires .NET Framework 4.7.2/4.8 (Windows only)
 
 ## How to Open
 
@@ -29,7 +39,7 @@ There are a few ways to open these projects:
 .\Open-Projects.ps1
 ```
 
-**Quick way:** Just double-click `Taska.sln`
+**Quick way:** Just double-click `Taska.sln` (note: Web Forms projects will show build errors)
 
 **Command line:**
 ```powershell
@@ -37,16 +47,25 @@ cd "e:\Visual Programing Practice\Taska"
 start Taska.sln
 ```
 
+**To build only compatible projects:**
+```powershell
+dotnet build ADO_WinForms/ADO_WinForms.csproj
+dotnet build REST_API/REST_API.csproj
+dotnet build API_Consumer/API_Consumer.csproj
+dotnet build Core_MVC_EF/Core_MVC_EF.csproj
+```
+
 ## ✅ What's Included
 What's in Each Project
 
-### 1. **ADO_WinForms** - Windows Forms Desktop
+### 1. **ADO_WinForms** - Windows Forms Desktop (.NET 10) ✅
 This is a desktop app using pure ADO.NET (no Entity Framework or anything fancy). It has:
 - MainForm showing statistics dashboard
 - StudentListForm with DataGridView for viewing students
 - Add/Edit forms that pop up as modal dialogs
 - Course management features
-### 2. **ADO_CRUD** - Pure ADO.NET Web
+
+### 2. **ADO_CRUD** - Pure ADO.NET Web (.NET Framework 4.8) ❌
 ```
 Direct database access with ADO.NET
 Same ADO.NET approach but for web applications. Learning how to use:
