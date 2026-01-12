@@ -1,0 +1,108 @@
+@model API_Consumer.Models.Student
+
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<div class="header-section">
+    <h1><i class="fas fa-user-plus"></i> Add New Student</h1>
+    <p class="subtitle">Data will be sent to REST API using LINQ to JSON (JObject)</p>
+</div>
+
+<div class="form-container">
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter full name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Course" class="form-label"></label>
+                    <select asp-for="Course" class="form-control">
+                        <option value="">-- Select Course --</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Artificial Intelligence">Artificial Intelligence</option>
+                        <option value="Business Administration">Business Administration</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Medicine">Medicine</option>
+                        <option value="Arts">Arts</option>
+                    </select>
+                    <span asp-validation-for="Course" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="EnrollmentDate" class="form-label"></label>
+                    <input asp-for="EnrollmentDate" class="form-control" type="date" />
+                    <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="IsActive" class="form-label"></label>
+                    <div class="form-check">
+                        <input asp-for="IsActive" class="form-check-input" type="checkbox" checked />
+                        <label class="form-check-label" asp-for="IsActive">
+                            Student is currently active
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Address" class="form-label"></label>
+            <textarea asp-for="Address" class="form-control" rows="3" placeholder="Enter address (optional)"></textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Create Student
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="info-box mt-4">
+    <h6><i class="fas fa-info-circle"></i> LINQ to JSON in Action:</h6>
+    <p class="mb-0">This form data will be converted to a JObject and sent to the REST API using HttpClient POST request.</p>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

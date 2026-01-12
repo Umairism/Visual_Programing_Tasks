@@ -1,0 +1,110 @@
+@model Core_MVC_EF.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="header-section">
+    <h1><i class="fas fa-user-circle"></i> Student Details</h1>
+    <p class="subtitle">View complete student information</p>
+</div>
+
+<div class="details-container">
+    <div class="details-card">
+        <div class="card-header">
+            <h3>@Model.Name</h3>
+            @if (Model.IsActive)
+            {
+                <span class="badge bg-success">Active</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">Inactive</span>
+            }
+        </div>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <i class="fas fa-id-card"></i>
+                        <div>
+                            <label>Student ID</label>
+                            <p>@Model.Id</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <label>Full Name</label>
+                            <p>@Model.Name</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <label>Email Address</label>
+                            <p>@Model.Email</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <label>Course</label>
+                            <p>@Model.Course</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div>
+                            <label>Enrollment Date</label>
+                            <p>@Model.EnrollmentDate.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <label>Phone Number</label>
+                            <p>@Model.Phone</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <label>Address</label>
+                            <p>@(string.IsNullOrEmpty(Model.Address) ? "Not provided" : Model.Address)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <label>Created Date</label>
+                            <p>@Model.CreatedDate.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>

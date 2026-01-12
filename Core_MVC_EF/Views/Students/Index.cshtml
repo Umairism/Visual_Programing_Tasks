@@ -1,0 +1,115 @@
+@model IEnumerable<Core_MVC_EF.Models.Student>
+
+@{
+    ViewData["Title"] = "Students List";
+}
+
+<div class="header-section">
+    <h1><i class="fas fa-user-graduate"></i> Student Management</h1>
+    <p class="subtitle">Manage your students with Entity Framework Core</p>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="action-bar">
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Student
+    </a>
+    
+    <form asp-action="Index" method="get" class="search-form">
+        <div class="search-box">
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" 
+                   class="form-control search-input" placeholder="Search by name, email, or course..." />
+            <button type="submit" class="btn btn-secondary">
+                <i class="fas fa-search"></i> Search
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-redo"></i> Clear
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="stats-card">
+    <i class="fas fa-users"></i>
+    <span>Total Students: <strong>@ViewBag.TotalStudents</strong></span>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-modern">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Enrollment Date</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>
+                            <div class="student-name">
+                                <i class="fas fa-user-circle"></i>
+                                @item.Name
+                            </div>
+                        </td>
+                        <td>@item.Email</td>
+                        <td><span class="badge bg-info">@item.Course</span></td>
+                        <td>@item.EnrollmentDate.ToString("MMM dd, yyyy")</td>
+                        <td>@item.Phone</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Inactive</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center py-4">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No students found.</p>
+                        <a asp-action="Create" class="btn btn-primary mt-2">
+                            <i class="fas fa-plus"></i> Add Your First Student
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

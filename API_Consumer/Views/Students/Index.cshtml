@@ -1,0 +1,154 @@
+@model IEnumerable<API_Consumer.Models.Student>
+
+@{
+    ViewData["Title"] = "Students List";
+}
+
+<div class="header-section">
+    <h1><i class="fas fa-user-graduate"></i> Student Management - API Consumer</h1>
+    <p class="subtitle">ASP.NET Core MVC consuming REST API with LINQ to JSON (Newtonsoft.Json)</p>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="fas fa-info-circle"></i> @TempData["InfoMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="action-bar">
+    <div>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add New Student
+        </a>
+        <a asp-action="Active" class="btn btn-success">
+            <i class="fas fa-check-circle"></i> Active Students
+        </a>
+    </div>
+    
+    <form asp-action="Index" method="get" class="search-form">
+        <div class="search-box">
+            <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" 
+                   class="form-control search-input" placeholder="Search by name, email, or course..." />
+            <button type="submit" class="btn btn-secondary">
+                <i class="fas fa-search"></i> Search
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-redo"></i> Clear
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="stats-card">
+    <i class="fas fa-database"></i>
+    <span>Total Students: <strong>@ViewBag.TotalCount</strong></span>
+    <span class="ms-3">Displayed: <strong>@Model.Count()</strong></span>
+    <span class="badge bg-info ms-3">Using LINQ to JSON</span>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-modern">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Enrollment Date</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>
+                            <div class="student-name">
+                                <i class="fas fa-user-circle"></i>
+                                @item.Name
+                            </div>
+                        </td>
+                        <td>@item.Email</td>
+                        <td>
+                            <a asp-action="ByCourse" asp-route-course="@item.Course" class="badge bg-info text-decoration-none">
+                                @item.Course
+                            </a>
+                        </td>
+                        <td>@item.EnrollmentDate.ToString("MMM dd, yyyy")</td>
+                        <td>@item.Phone</td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Inactive</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center py-5">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No students found.</p>
+                        <p class="text-muted small">Make sure the REST API is running at https://localhost:5001</p>
+                        <a asp-action="Create" class="btn btn-primary mt-2">
+                            <i class="fas fa-plus"></i> Add Your First Student
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="info-box mt-4">
+    <h5><i class="fas fa-code"></i> LINQ to JSON Features Used:</h5>
+    <ul>
+        <li><strong>JObject.Parse()</strong> - Parse JSON strings into queryable objects</li>
+        <li><strong>JArray</strong> - Handle JSON arrays with LINQ queries</li>
+        <li><strong>LINQ Queries</strong> - Filter, select, and transform JSON data</li>
+        <li><strong>JToken.ToObject&lt;T&gt;()</strong> - Convert JSON tokens to strongly-typed objects</li>
+        <li><strong>Dynamic JSON Creation</strong> - Build JSON payloads using JObject</li>
+    </ul>
+</div>

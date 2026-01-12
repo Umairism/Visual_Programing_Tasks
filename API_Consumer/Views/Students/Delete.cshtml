@@ -1,0 +1,88 @@
+@model API_Consumer.Models.Student
+
+@{
+    ViewData["Title"] = "Delete Student";
+}
+
+<div class="header-section">
+    <h1><i class="fas fa-exclamation-triangle text-danger"></i> Delete Student</h1>
+    <p class="subtitle text-danger">Are you sure you want to delete this student?</p>
+</div>
+
+<div class="delete-container">
+    <div class="alert alert-warning">
+        <i class="fas fa-exclamation-circle"></i>
+        <strong>Warning!</strong> This action will send a DELETE request to the REST API and cannot be undone.
+    </div>
+    
+    <div class="details-card">
+        <div class="card-header bg-danger text-white">
+            <h3>@Model.Name</h3>
+        </div>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <i class="fas fa-id-card"></i>
+                        <div>
+                            <label>Student ID</label>
+                            <p>@Model.Id</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <label>Email</label>
+                            <p>@Model.Email</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <label>Course</label>
+                            <p>@Model.Course</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="detail-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div>
+                            <label>Enrollment Date</label>
+                            <p>@Model.EnrollmentDate.ToString("MMM dd, yyyy")</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <label>Phone</label>
+                            <p>@Model.Phone</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Confirm Delete
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="info-box mt-4">
+    <h6><i class="fas fa-code"></i> API Call:</h6>
+    <p class="mb-0">DELETE request will be sent to: <code>https://localhost:5001/api/students/@Model.Id</code></p>
+</div>

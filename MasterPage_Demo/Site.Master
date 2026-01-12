@@ -1,0 +1,218 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="MasterPage_Demo.Site" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - TechCorp Solutions</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    
+    <!-- Custom CSS -->
+    <link href="~/Styles/site.css" rel="stylesheet" />
+    
+    <!-- ContentPlaceHolder for additional head content -->
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- Header Section -->
+        <header class="site-header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container">
+                    <!-- Logo and Brand -->
+                    <a class="navbar-brand d-flex align-items-center" href="Default.aspx">
+                        <i class="fas fa-code me-2 fs-3"></i>
+                        <div>
+                            <div class="brand-name">TechCorp</div>
+                            <div class="brand-tagline">Innovation Through Technology</div>
+                        </div>
+                    </a>
+                    
+                    <!-- Mobile Toggle Button -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <!-- Navigation Menu -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <asp:HyperLink ID="lnkHome" runat="server" NavigateUrl="~/Default.aspx" CssClass="nav-link">
+                                    <i class="fas fa-home me-1"></i>Home
+                                </asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="lnkAbout" runat="server" NavigateUrl="~/About.aspx" CssClass="nav-link">
+                                    <i class="fas fa-info-circle me-1"></i>About
+                                </asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="lnkProducts" runat="server" NavigateUrl="~/Products.aspx" CssClass="nav-link">
+                                    <i class="fas fa-box me-1"></i>Products
+                                </asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="lnkServices" runat="server" NavigateUrl="~/Services.aspx" CssClass="nav-link">
+                                    <i class="fas fa-cogs me-1"></i>Services
+                                </asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="lnkContact" runat="server" NavigateUrl="~/Contact.aspx" CssClass="nav-link">
+                                    <i class="fas fa-envelope me-1"></i>Contact
+                                </asp:HyperLink>
+                            </li>
+                        </ul>
+                        
+                        <!-- Search Box -->
+                        <div class="d-flex ms-3">
+                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control form-control-sm me-2" placeholder="Search..." />
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-sm btn-light" OnClick="btnSearch_Click" />
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Breadcrumb Section -->
+            <div class="breadcrumb-section bg-light py-2">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="Default.aspx"><i class="fas fa-home"></i> Home</a>
+                            </li>
+                            <asp:ContentPlaceHolder ID="BreadcrumbPlaceHolder" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="container py-4">
+                <!-- Page Title Section -->
+                <div class="page-title-section mb-4">
+                    <h1 class="page-title">
+                        <asp:ContentPlaceHolder ID="PageTitlePlaceHolder" runat="server">
+                            Welcome
+                        </asp:ContentPlaceHolder>
+                    </h1>
+                    <hr class="title-divider" />
+                </div>
+                
+                <!-- Main Content PlaceHolder -->
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </main>
+        
+        <!-- Sidebar PlaceHolder (Optional) -->
+        <aside class="sidebar-section">
+            <div class="container py-4">
+                <asp:ContentPlaceHolder ID="SidebarContent" runat="server">
+                    <!-- Default Sidebar Content -->
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-header bg-info text-white">
+                            <i class="fas fa-info-circle"></i> Quick Links
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><a href="Default.aspx" class="text-decoration-none">Home</a></li>
+                                <li><a href="About.aspx" class="text-decoration-none">About Us</a></li>
+                                <li><a href="Products.aspx" class="text-decoration-none">Products</a></li>
+                                <li><a href="Services.aspx" class="text-decoration-none">Services</a></li>
+                                <li><a href="Contact.aspx" class="text-decoration-none">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </asp:ContentPlaceHolder>
+            </div>
+        </aside>
+        
+        <!-- Footer Section -->
+        <footer class="site-footer bg-dark text-white py-4">
+            <div class="container">
+                <div class="row">
+                    <!-- Company Info -->
+                    <div class="col-md-4 mb-3">
+                        <h5 class="text-uppercase mb-3">
+                            <i class="fas fa-code me-2"></i>TechCorp Solutions
+                        </h5>
+                        <p class="mb-2">Innovation Through Technology</p>
+                        <p class="small text-muted">
+                            Providing cutting-edge solutions for businesses worldwide since 2020.
+                        </p>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="col-md-4 mb-3">
+                        <h5 class="text-uppercase mb-3">Quick Links</h5>
+                        <ul class="list-unstyled footer-links">
+                            <li><a href="Default.aspx"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                            <li><a href="About.aspx"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                            <li><a href="Products.aspx"><i class="fas fa-angle-right me-2"></i>Products</a></li>
+                            <li><a href="Services.aspx"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                            <li><a href="Contact.aspx"><i class="fas fa-angle-right me-2"></i>Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Contact Info -->
+                    <div class="col-md-4 mb-3">
+                        <h5 class="text-uppercase mb-3">Contact Info</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                123 Tech Street, Silicon Valley, CA 94025
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-phone me-2"></i>
+                                +1 (555) 123-4567
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-envelope me-2"></i>
+                                info@techcorp.com
+                            </li>
+                        </ul>
+                        
+                        <!-- Social Media -->
+                        <div class="social-links mt-3">
+                            <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                            <a href="#" class="text-white me-3"><i class="fab fa-github fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="bg-secondary" />
+                
+                <!-- Copyright -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p class="mb-0 small">
+                            &copy; <%= DateTime.Now.Year %> TechCorp Solutions. All Rights Reserved. 
+                            | Designed with <i class="fas fa-heart text-danger"></i> using ASP.NET Master Pages
+                            | Current Time: <asp:Label ID="lblCurrentTime" runat="server" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </form>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts PlaceHolder -->
+    <asp:ContentPlaceHolder ID="ScriptsContent" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

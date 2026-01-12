@@ -1,0 +1,167 @@
+/* ============================================
+   Centralized DbCon CRUD Application Styles
+   ============================================ */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #198754 0%, #146c43 100%);
+}
+
+/* Architecture Card */
+.architecture-card {
+    border-radius: 15px;
+}
+
+.architecture-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.architecture-flow {
+    margin-top: 20px;
+}
+
+.flow-box {
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.flow-arrow {
+    font-size: 24px;
+    font-weight: bold;
+    color: #198754;
+    text-align: center;
+    margin: 5px 0;
+}
+
+/* Statistics Cards */
+.stat-card {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Tables */
+.table {
+    background-color: white;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-group .btn:hover {
+    transform: none;
+}
+
+/* Form Controls */
+.form-control:focus,
+.form-select:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Alert */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Badge */
+.badge {
+    padding: 0.5em 0.8em;
+    font-weight: 600;
+}
+
+/* Code */
+code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #d63384;
+    font-size: 0.9em;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.85rem;
+    }
+    
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animation */
+.card {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
